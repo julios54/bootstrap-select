@@ -369,6 +369,7 @@
     liveSearchPlaceholder: null,
     liveSearchNormalize: false,
     liveSearchStyle: 'contains',
+    liveSearchAutofocus: true,
     actionsBox: false,
     iconBase: 'glyphicon',
     tickIcon: 'glyphicon-ok',
@@ -1361,7 +1362,7 @@
 
           if (!that.multiple || (that.multiple && that.options.maxOptions === 1)) {
             that.$button.focus();
-          } else if (that.options.liveSearch) {
+          } else if (that.options.liveSearch && that.options.liveSearchAutofocus) {
             that.$searchbox.focus();
           }
 
@@ -1382,7 +1383,9 @@
           e.preventDefault();
           e.stopPropagation();
           if (that.options.liveSearch && !$(e.target).hasClass('close')) {
-            that.$searchbox.focus();
+            if (that.options.liveSearchAutofocus) {
+              that.$searchbox.focus();
+            }
           } else {
             that.$button.focus();
           }
@@ -1393,7 +1396,9 @@
         e.preventDefault();
         e.stopPropagation();
         if (that.options.liveSearch) {
-          that.$searchbox.focus();
+          if (that.options.liveSearchAutofocus) {
+            that.$searchbox.focus();
+          }
         } else {
           that.$button.focus();
         }
@@ -1409,7 +1414,9 @@
 
       this.$menu.on('click', '.actions-btn', function (e) {
         if (that.options.liveSearch) {
-          that.$searchbox.focus();
+          if (that.options.liveSearchAutofocus) {
+            that.$searchbox.focus();
+          }
         } else {
           that.$button.focus();
         }
@@ -1444,7 +1451,9 @@
         }
         if (!that.multiple) that.$menuInner.find('.selected').addClass('active');
         setTimeout(function () {
-          that.$searchbox.focus();
+          if (that.options.liveSearchAutofocus) {
+            that.$searchbox.focus();
+          }
         }, 10);
       });
 
